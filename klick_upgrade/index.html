@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6d28d9">
+  <title>Klick — Loja de aplicativos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <header class="topbar">
+    <button class="brand" onclick="navigate('home')" aria-label="Ir para o início">
+      <span class="brand-mark">k</span><span>klick</span>
+    </button>
+
+    <div class="search-wrap">
+      <span>⌕</span>
+      <input id="searchInput" type="search" placeholder="Buscar aplicativos e jogos..." oninput="searchApps(this.value)">
+      <button class="search-filter" onclick="toggleFilter()" aria-label="Abrir filtros">☷</button>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn" title="Notificações" onclick="showToast('Você não tem novas notificações.')">♧</button>
+      <button class="cart-btn" onclick="openCart()">🛒 <b id="cartCount">0</b></button>
+      <button id="accountBtn" class="account-btn" onclick="openAccount()">Entrar</button>
+    </div>
+  </header>
+
+  <div id="filterBar" class="filter-bar hidden">
+    <button class="chip active" onclick="filterByPrice('all', this)">Todos</button>
+    <button class="chip" onclick="filterByPrice('free', this)">Grátis</button>
+    <button class="chip" onclick="filterByPrice('paid', this)">Pagos</button>
+    <select id="sortSelect" onchange="renderApps()">
+      <option value="popular">Mais populares</option>
+      <option value="rating">Melhor avaliação</option>
+      <option value="priceAsc">Menor preço</option>
+      <option value="priceDesc">Maior preço</option>
+    </select>
+  </div>
+
+  <main id="app"></main>
+
+  <nav class="bottom-nav" aria-label="Navegação principal">
+    <button data-page="home" onclick="navigate('home')"><span>⌂</span>Início</button>
+    <button data-page="categories" onclick="navigate('categories')"><span>▦</span>Categorias</button>
+    <button data-page="publish" onclick="navigate('publish')"><span class="publish-icon">＋</span>Publicar</button>
+    <button data-page="library" onclick="navigate('library')"><span>▣</span>Biblioteca</button>
+    <button data-page="profile" onclick="navigate('profile')"><span>♙</span>Perfil</button>
+  </nav>
+
+  <div id="modal" class="modal hidden" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()" aria-label="Fechar">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
